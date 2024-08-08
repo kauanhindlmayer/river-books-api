@@ -1,5 +1,3 @@
-
-
 namespace RiverBooks.Books;
 
 public class BookService(IBookRepository bookRepository) : IBookService
@@ -25,7 +23,7 @@ public class BookService(IBookRepository bookRepository) : IBookService
             throw new InvalidOperationException($"Book with id {id} not found.");
         }
 
-        await _bookRepository.DeleteAsync(id);
+        await _bookRepository.DeleteAsync(book);
         await _bookRepository.SaveChangesAsync();
     }
 

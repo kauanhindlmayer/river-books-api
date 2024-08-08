@@ -1,12 +1,20 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace RiverBooks.Books;
 
 public static class BookServiceExtensions
 {
-    public static IServiceCollection AddBookServices(this IServiceCollection services)
+    public static IServiceCollection AddBookServices(
+        this IServiceCollection services,
+        ConfigurationManager configuration)
     {
-        services.AddSingleton<IBookService, BookService>();
+        string? connectionString = configuration.GetConnectionString("DefaultConnection");
+        services.AddDbContext<BookDbContext>(options => options.UseSqlServer(connectionString));
+        services.AddScoped<IBookRepository, BookRepository>();
+        services.AddScoped<IBookService, BookService>();
+
         return services;
     }
 }
