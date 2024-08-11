@@ -16,6 +16,9 @@ public static class UsersModuleExtensions
         string? connectionString = configuration.GetConnectionString("DefaultConnection");
         services.AddDbContext<UsersDbContext>(options => options.UseSqlServer(connectionString));
 
+        services.AddIdentityCore<ApplicationUser>()
+            .AddEntityFrameworkStores<UsersDbContext>();
+
         logger.Information("Users module added");
         return services;
     }
