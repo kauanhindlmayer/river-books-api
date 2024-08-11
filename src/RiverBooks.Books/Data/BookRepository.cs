@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace RiverBooks.Books.Data;
 
-public class BookRepository(BookDbContext dbContext) : IBookRepository
+public class BookRepository(BooksDbContext dbContext) : IBookRepository
 {
-    private readonly BookDbContext _dbContext = dbContext;
+    private readonly BooksDbContext _dbContext = dbContext;
 
     public async Task AddAsync(Book book, CancellationToken ct = default)
     {
