@@ -22,3 +22,6 @@ app.UseHttpsRedirection();
 app.UseFastEndpoints();
 
 app.Run();
+
+// This class is required for testing purposes only.
+public partial class Program { }

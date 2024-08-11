@@ -22,9 +22,9 @@ internal class BookConfiguration : IEntityTypeConfiguration<Book>
     {
         return
         [
-            new Book(Guid.NewGuid(), "Domain-Driven Design", "Eric Evans", 55.90m),
-            new Book(Guid.NewGuid(), "Clean Code", "Robert C. Martin", 45.50m),
-            new Book(Guid.NewGuid(), "Refactoring", "Martin Fowler", 40.00m),
+            new Book(Guid.Parse("00000000-0000-0000-0000-000000000001"), "Domain-Driven Design", "Eric Evans", 55.90m),
+            new Book(Guid.Parse("00000000-0000-0000-0000-000000000002"), "Clean Code", "Robert C. Martin", 45.50m),
+            new Book(Guid.Parse("00000000-0000-0000-0000-000000000003"), "Refactoring", "Martin Fowler", 40.00m),
             new Book(Guid.NewGuid(), "Design Patterns", "Erich Gamma", 48.90m),
             new Book(Guid.NewGuid(), "Working Effectively with Legacy Code", "Michael Feathers", 32.00m),
             new Book(Guid.NewGuid(), "The Pragmatic Programmer", "Andrew Hunt", 42.00m),
