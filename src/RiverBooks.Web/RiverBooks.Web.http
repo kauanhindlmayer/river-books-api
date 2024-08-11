@@ -1,4 +1,36 @@
-@RiverBooks.Web_HostAddress = http://localhost:5008
+@RiverBooks.Web_HostAddress=http://localhost:5008
+@BookId=86834a98-b2fd-46fa-89ef-1c3219e7f1c8
 
 GET {{RiverBooks.Web_HostAddress}}/api/books/
 Accept: application/json
+
+###
+
+GET {{RiverBooks.Web_HostAddress}}/api/books/{{BookId}}
+Accept: application/json
+
+###
+
+POST {{RiverBooks.Web_HostAddress}}/api/books/
+Content-Type: application/json
+
+{
+  "title": "The Art of Unit Testing",
+  "author": "Roy Osherove",
+  "price": 30.0
+}
+
+###
+
+DELETE {{RiverBooks.Web_HostAddress}}/api/books/{{BookId}}
+Accept: application/json
+
+###
+
+POST {{RiverBooks.Web_HostAddress}}/api/books/{{BookId}}/price-history
+Content-Type: application/json
+
+{
+  "id": "86834a98-b2fd-46fa-89ef-1c3219e7f1c8",
+  "price": 20.0
+}
