@@ -1,6 +1,6 @@
 ﻿using FastEndpoints;
 
-namespace RiverBooks.Books;
+namespace RiverBooks.Books.Endpoints.ListBooks;
 
 internal class ListBooksEndpoint(IBookService bookService)
     : EndpointWithoutRequest<ListBooksResponse>
@@ -13,14 +13,14 @@ internal class ListBooksEndpoint(IBookService bookService)
         AllowAnonymous();
     }
 
-    public override async Task<ListBooksResponse> HandleAsync(CancellationToken cancellationToken = default)
+    public override async Task<ListBooksResponse> HandleAsync(CancellationToken ct = default)
     {
-        var books = await _bookService.ListBooksAsync();
+        var books = await _bookService.ListBooksAsync(ct);
 
         await SendAsync(new ListBooksResponse()
         {
             Books = books
-        }, cancellation: cancellationToken);
+        }, cancellation: ct);
 
         return new ListBooksResponse()
         {

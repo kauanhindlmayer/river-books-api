@@ -1,6 +1,6 @@
 using FastEndpoints;
 
-namespace RiverBooks.Books;
+namespace RiverBooks.Books.Endpoints.GetBookById;
 
 internal class GetBookByIdEndpoint(IBookService bookService) : Endpoint<GetBookByIdRequest, BookDto>
 {
@@ -14,16 +14,16 @@ internal class GetBookByIdEndpoint(IBookService bookService) : Endpoint<GetBookB
 
     public override async Task HandleAsync(
         GetBookByIdRequest request,
-        CancellationToken cancellationToken = default)
+        CancellationToken ct = default)
     {
-        var book = await _bookService.GetBookByIdAsync(request.Id);
+        var book = await _bookService.GetBookByIdAsync(request.Id, ct);
 
         if (book is null)
         {
-            await SendNotFoundAsync(cancellationToken);
+            await SendNotFoundAsync(ct);
             return;
         }
 
-        await SendAsync(book, cancellation: cancellationToken);
+        await SendAsync(book, cancellation: ct);
     }
 }

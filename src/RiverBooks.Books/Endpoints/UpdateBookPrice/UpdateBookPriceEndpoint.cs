@@ -1,6 +1,6 @@
 using FastEndpoints;
 
-namespace RiverBooks.Books;
+namespace RiverBooks.Books.Endpoints.UpdateBookPrice;
 
 internal class UpdateBookPriceEndpoint(IBookService bookService)
     : Endpoint<UpdateBookPriceRequest, BookDto>
@@ -15,15 +15,15 @@ internal class UpdateBookPriceEndpoint(IBookService bookService)
 
     public override async Task HandleAsync(
         UpdateBookPriceRequest request,
-        CancellationToken cancellationToken = default)
+        CancellationToken ct = default)
     {
-        // TODO: Handle not found
         await _bookService.UpdateBookPriceAsync(
             request.Id,
-            request.Price);
+            request.Price,
+            ct);
 
-        var updatedBook = await _bookService.GetBookByIdAsync(request.Id);
+        var updatedBook = await _bookService.GetBookByIdAsync(request.Id, ct);
 
-        await SendAsync(updatedBook!, cancellation: cancellationToken);
+        await SendAsync(updatedBook!, cancellation: ct);
     }
 }
