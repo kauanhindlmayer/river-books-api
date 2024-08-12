@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using FastEndpoints;
 using FastEndpoints.Security;
 using Microsoft.AspNetCore.Identity;
@@ -33,6 +34,7 @@ public class LoginEndpoint(UserManager<ApplicationUser> userManager) : Endpoint<
         var jwtToken = JwtBearer.CreateToken(options =>
         {
             options.SigningKey = Config["Auth:JwtSecret"]!;
+            options.User.Claims.Add(new Claim(ClaimTypes.Email, user.Email!));
             options.ExpireAt = DateTime.UtcNow.AddDays(1);
         });
 

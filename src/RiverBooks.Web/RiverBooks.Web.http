@@ -1,5 +1,6 @@
 @RiverBooks.Web_HostAddress=https://localhost:7105
 @BookId=86834a98-b2fd-46fa-89ef-1c3219e7f1c8
+@token=eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJqb2huLmRvZUBlbWFpbC5jb20iLCJleHAiOjE3MjM1MDc4NDgsImlhdCI6MTcyMzQyMTQ0OCwibmJmIjoxNzIzNDIxNDQ4fQ.TDuo6ZgmTJv-86oYtGPFPMwpfA5u1ypXhNO1I3VfhJ8
 
 GET {{RiverBooks.Web_HostAddress}}/api/books/
 Accept: application/json
@@ -56,3 +57,21 @@ Content-Type: application/json
   "email": "john.doe@email.com",
   "password": "twukfyxS%^tH^dE6"
 }
+
+### Add Cart Item
+
+POST {{RiverBooks.Web_HostAddress}}/api/cart
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "bookId": "b9bf5ec9-9559-45e2-a7ba-0dac14bbba06",
+  "quantity": 1
+}
+
+### List Cart Items
+
+GET {{RiverBooks.Web_HostAddress}}/api/cart
+Accept: application/json
+Authorization: Bearer {{token}}

@@ -1,3 +1,4 @@
+using System.Reflection;
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
@@ -19,13 +20,17 @@ builder.Host.UseSerilog((_, config) => config.ReadFrom.Configuration(builder.Con
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+List<Assembly> mediatRAssemblies = [typeof(Program).Assembly];
+
 builder.Services
     .AddAuthenticationJwtBearer(s => s.SigningKey = builder.Configuration["Auth:JwtSecret"])
     .AddAuthorization()
     .AddFastEndpoints()
     .SwaggerDocument()
-    .AddBooksModule(builder.Configuration, logger)
-    .AddUsersModule(builder.Configuration, logger);
+    .AddBooksModule(builder.Configuration, logger, mediatRAssemblies)
+    .AddUsersModule(builder.Configuration, logger, mediatRAssemblies);
+
+builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblies([.. mediatRAssemblies]));
 
 var app = builder.Build();
 

@@ -17,7 +17,7 @@ public class CreateUserEndpoint(UserManager<ApplicationUser> userManager)
     public override async Task HandleAsync(CreateUserRequest request, CancellationToken ct)
     {
         var user = new ApplicationUser { UserName = request.Email, Email = request.Email };
-        var result = await _userManager.CreateAsync(user, request.Password);
+        await _userManager.CreateAsync(user, request.Password);
         await SendOkAsync(ct);
     }
 }
