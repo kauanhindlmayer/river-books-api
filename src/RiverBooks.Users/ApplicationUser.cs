@@ -16,6 +16,8 @@ public class ApplicationUser : IdentityUser
         if (existingCartItem is not null)
         {
             existingCartItem.IncreaseQuantity(cartItem.Quantity);
+            existingCartItem.UpdateDescription(cartItem.Description);
+            existingCartItem.UpdatePrice(cartItem.Price);
             return;
         }
         _cartItems.Add(cartItem);
@@ -46,5 +48,15 @@ public class CartItem
     {
         Guard.Against.NegativeOrZero(quantity);
         Quantity += quantity;
+    }
+
+    public void UpdateDescription(string description)
+    {
+        Description = Guard.Against.NullOrEmpty(description);
+    }
+
+    public void UpdatePrice(decimal price)
+    {
+        Price = Guard.Against.NegativeOrZero(price);
     }
 }
