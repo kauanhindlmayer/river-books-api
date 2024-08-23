@@ -20,7 +20,7 @@ public static class BooksModuleExtensions
         services.AddScoped<IBookService, BookService>();
         mediatRAssemblies.Add(typeof(BooksModuleExtensions).Assembly);
 
-        logger.Information("Books module added");
+        logger.Information("{Module} module added", "Books");
         return services;
     }
 }

@@ -1,23 +1,23 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RiverBooks.Users.Data;
+using RiverBooks.OrderProcessing.Data;
 using Serilog;
 
-namespace RiverBooks.Users;
+namespace RiverBooks.OrderProcessing;
 
-public static class UsersModuleExtensions
+public static class OrderProcessingModuleExtensions
 {
-    public static IServiceCollection AddUsersModule(
+    public static IServiceCollection AddOrderProcessingModule(
         this IServiceCollection services,
         ConfigurationManager configuration,
         ILogger logger,
         List<System.Reflection.Assembly> mediatRAssemblies)
     {
-        mediatRAssemblies.Add(typeof(UsersModuleExtensions).Assembly);
+        mediatRAssemblies.Add(typeof(OrderProcessingModuleExtensions).Assembly);
         services.AddPersistence(configuration);
 
-        logger.Information("{Module} module added", "Users");
+        logger.Information("{Module} module added", "OrderProcessing");
         return services;
     }
 
@@ -25,8 +25,7 @@ public static class UsersModuleExtensions
         ConfigurationManager configuration)
     {
         string? connectionString = configuration.GetConnectionString("DefaultConnection");
-        services.AddDbContext<UsersDbContext>(options => options.UseSqlServer(connectionString));
-        services.AddIdentityCore<ApplicationUser>().AddEntityFrameworkStores<UsersDbContext>();
-        services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+        services.AddDbContext<OrderProcessingDbContext>(options => options.UseSqlServer(connectionString));
+        services.AddScoped<IOrderRepository, OrderRepository>();
     }
 }

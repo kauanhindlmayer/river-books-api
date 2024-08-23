@@ -3,6 +3,7 @@ using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 using RiverBooks.Books;
+using RiverBooks.OrderProcessing;
 using RiverBooks.Users;
 using Serilog;
 
@@ -28,7 +29,8 @@ builder.Services
     .AddFastEndpoints()
     .SwaggerDocument()
     .AddBooksModule(builder.Configuration, logger, mediatRAssemblies)
-    .AddUsersModule(builder.Configuration, logger, mediatRAssemblies);
+    .AddUsersModule(builder.Configuration, logger, mediatRAssemblies)
+    .AddOrderProcessingModule(builder.Configuration, logger, mediatRAssemblies);
 
 builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblies([.. mediatRAssemblies]));
 
